@@ -1,0 +1,16 @@
+Package: bwardr
+Version: 0.1
+Date: 2018-02-13
+Title: Brian Ward personal R package
+Description: A package containing functions that I (Brian Ward) often use in
+    analyses
+Author: Brian Ward <brian@brianpward.net>
+Depends: R (>= 3.4.3)
+Imports:
+    tidyverse,
+    plyr,
+    vcfR
+Maintainer: Brian Ward <brian@brianpward.net>
+License: MIT + file LICENSE
+RoxygenNote: 6.0.1
+
