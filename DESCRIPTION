@@ -9,6 +9,7 @@ Depends: R (>= 3.4.3)
 Imports:
     tidyverse,
     plyr,
+    gaston,
     vcfR
 Maintainer: Brian Ward <brian@brianpward.net>
 License: MIT + file LICENSE
