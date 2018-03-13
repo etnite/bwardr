@@ -13,7 +13,7 @@
 #'   However, underscores can cause problems with reading
 #'   VCFs in PLINK, as they will by default be interpreted as delimiters for
 #'   family and individual IDs
-#' @suggests stringdist, plyr
+#' @export
 stand_str <- function(str_in, word_delim = "-") {
   
   ## Check for appropriate word delimiter selection

@@ -14,7 +14,7 @@
 #'   The environments are then arranged in increasing order by the mean values
 #'   of the core genotypes within each environment, and then a regression is fit
 #'   for each individual core genotype.
-#' @import tidyverse
+#' @importFrom magrittr %>%
 #' @export
 ge_plot_gen <- function(trait_df, trait_of_int, min_core = 5) {
   
@@ -26,20 +26,20 @@ ge_plot_gen <- function(trait_df, trait_of_int, min_core = 5) {
   core_lines <- Reduce(intersect, genos_by_env)
   
   if (length(core_lines) >= min_core) {
-    filter(trait_df, GENOTYPE %in% core_lines) %>%
-      select(one_of(c("GENOTYPE", "ENV", trait_of_int))) ->
+    dplyr::filter(trait_df, GENOTYPE %in% core_lines) %>%
+      dplyr::select(one_of(c("GENOTYPE", "ENV", trait_of_int))) ->
       sub_df
     
     ## Here standard evaluation is used (!!sym())
-    group_by(sub_df, ENV) %>%
-      summarise(Mean = mean(!!sym(trait_of_int))) %>%
-      arrange(Mean) %>%
-      mutate(GENOTYPE = "MEAN") ->
+    dplyr::group_by(sub_df, ENV) %>%
+      dplyr::summarise(Mean = mean(!!sym(trait_of_int))) %>%
+      dplyr::arrange(Mean) %>%
+      dplyr::mutate(GENOTYPE = "MEAN") ->
       env_order
     
     ## Add the within-env means to the data
     colnames(env_order)[colnames(env_order) == "Mean"] <- trait_of_int
-    sub_df <- bind_rows(env_order, sub_df)
+    sub_df <- dplyr::bind_rows(env_order, sub_df)
     sub_df$type <- "entry"
     sub_df$type[sub_df$GENOTYPE == "MEAN"] <- "mean"
     
@@ -49,7 +49,7 @@ ge_plot_gen <- function(trait_df, trait_of_int, min_core = 5) {
     sub_df <- sub_df[order(sub_df$ENV), ]
     
     ## Generate GxE plot
-    ggplot(sub_df, aes_string(x = "ENV", y = trait_of_int)) +
+    ggplot2::ggplot(sub_df, aes_string(x = "ENV", y = trait_of_int)) +
       geom_smooth(aes(group = GENOTYPE, color = type), method = "lm", size = 0.75, se = FALSE) +
       scale_color_manual(values = c(mean = "red", entry = "black")) +
       xlab("Environment") +

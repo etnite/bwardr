@@ -7,7 +7,9 @@ Description: A package containing functions that I (Brian Ward) often use in
 Author: Brian Ward <brian@brianpward.net>
 Depends: R (>= 3.4.3)
 Imports:
-    tidyverse,
+    magrittr,
+    dplyr,
+    ggplot2,
     plyr,
     gaston,
     vcfR
