@@ -12,7 +12,7 @@
 #'   typically not perform the centering/scaling/PCA in the correct orientation
 #' @importFrom stats prcomp
 #' @export
-geno_pca <- function(geno) {
+marker_pca <- function(geno) {
   col_names <- colnames(geno)
   
   ## Center/scale SNPs, set NA to 0
@@ -21,7 +21,7 @@ geno_pca <- function(geno) {
   
   ## Perform the PCA
   pca <- prcomp(geno, center = FALSE, scale. = FALSE)
-  eigvecs <- pca$rotation
+  eigvecs <- pca$x
   eigvals <- pca$sdev^2
   
   return(list("vectors" = eigvecs, "values" = eigvals))
