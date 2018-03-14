@@ -4,15 +4,18 @@
 \alias{marker_pca}
 \title{Perform PCA on marker data}
 \usage{
-marker_pca(geno)
+marker_pca(geno, snps = "rows")
 }
 \arguments{
-\item{geno}{A matrix of SNP data with SNPs in rows, genotypes in columns.
-SNPs should be encoded in minor-allele dosage format, so that:
+\item{geno}{A matrix of SNP data with SNPs in minor-allele dosage format:
 2 = homozygous for minor allele
 1 = heterozygous
 0 = homozygous for major allele
 NA = missing data}
+
+\item{snps}{Either "rows" to indicate that SNPs are in rows and individuals 
+are in columns, or "cols" to indicate the SNPs are in columns and
+individuals are in rows}
 }
 \value{
 The Eigen decomposition of the input genotypic matrix
@@ -21,7 +24,8 @@ The Eigen decomposition of the input genotypic matrix
 Perform PCA on marker data
 }
 \details{
-This function performs principle component analysis on a matrix of
-  SNP data. Note that there are a few transpositions required, as R would
-  typically not perform the centering/scaling/PCA in the correct orientation
+This function performs a "quick and dirty" principle component 
+  analysis on the input matrix of SNP data. A genetic relationship matrix
+  is calculated first, and then an Eigen decomposition is performed in this
+  matrix
 }

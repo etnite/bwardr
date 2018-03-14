@@ -1,7 +1,6 @@
 #' Perform PCA on marker data
 #' 
-#' @param geno A matrix of SNP data with SNPs in rows, genotypes in columns.
-#'   SNPs should be encoded in minor-allele dosage format, so that:
+#' @param geno A matrix of SNP data with SNPs in minor-allele dosage format:
 #'   2 = homozygous for minor allele
 #'   1 = heterozygous
 #'   0 = homozygous for major allele
@@ -10,10 +9,10 @@
 #'   are in columns, or "cols" to indicate the SNPs are in columns and
 #'   individuals are in rows
 #' @return The Eigen decomposition of the input genotypic matrix
-#' @details This function performs principle component analysis on a matrix of
-#'   SNP data. Note that there are a few transpositions required, as R would
-#'   typically not perform the centering/scaling/PCA in the correct orientation
-#' @importFrom stats prcomp
+#' @details This function performs a "quick and dirty" principle component 
+#'   analysis on the input matrix of SNP data. A genetic relationship matrix
+#'   is calculated first, and then an Eigen decomposition is performed in this
+#'   matrix
 #' @export
 marker_pca <- function(geno, snps = "rows") {
 
@@ -23,7 +22,7 @@ marker_pca <- function(geno, snps = "rows") {
   }
   if (snps == "cols") { geno <- t(geno)}
   
-  ## Center/scale SNPs, set NA to 0
+  ## Fast genetic relationship matrix generation
   R <- (1/nrow(geno)) * (t(geno) %*% geno)
   
   ## Perform eigen decomposition and return - that's it

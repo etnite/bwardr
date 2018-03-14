@@ -4,15 +4,18 @@
 \alias{eigstrat}
 \title{Perform Eigenstrat marker PCA}
 \usage{
-eigstrat(geno)
+eigstrat(geno, snps = "rows")
 }
 \arguments{
-\item{geno}{A matrix of SNP data with SNPs in rows, genotypes in columns.
-SNPs should be encoded in minor-allele dosage format, so that:
+\item{geno}{A matrix of SNP data encoded in minor-allele dosage format:
 2 = homozygous for minor allele
 1 = heterozygous
 0 = homozygous for major allele
 NA = missing data}
+
+\item{snps}{Either "rows" to indicate that SNPs are in rows and individuals 
+are in columns, or "cols" to indicate the SNPs are in columns and
+individuals are in rows}
 }
 \value{
 The Eigen decomposition of the input genotypic matrix

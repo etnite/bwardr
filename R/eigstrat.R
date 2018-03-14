@@ -21,16 +21,16 @@ eigstrat <- function(geno, snps = "rows") {
   }
   if (snps == "rows") { geno <- t(geno)}
   
-  ## Center SNPs, set NA to 0
+  ## Center SNPs
   geno <- scale(geno, scale = FALSE)
-  geno[is.na(geno)] <- 0
   
   ## Normalize SNPs
-  p <- as.vector(1 + colSums(geno))/(2 + 2*nrow(geno))
-  denom <- sqrt(p * (1 - p))
+  p_est <- as.vector(1 + colSums(geno, na.rm = TRUE))/(2 + 2*nrow(geno))
+  denom <- sqrt(p_est * (1 - p_est))
   geno <- geno/denom
   
-  ## Calculate covariance matrix
+  ## Set NAs to 0; Calculate covariance matrix
+  geno[is.na(geno)] <- 0
   cov_mat <- cov(t(geno))
   
   ## Perform Eigen decomposition
