@@ -2,9 +2,12 @@
 
 export(bed2mat)
 export(eigstrat)
+export(fdr_thresh)
 export(ge_plot_gen)
 export(marker_pca)
 export(stand_str)
 export(vcf2dos)
 importFrom(magrittr,"%>%")
 importFrom(stats,cov)
+importFrom(stats,lm)
+importFrom(stats,p.adjust)
