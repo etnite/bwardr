@@ -15,6 +15,7 @@
 #'   of the core genotypes within each environment, and then a regression is fit
 #'   for each individual core genotype.
 #' @importFrom magrittr %>%
+#' @importFrom rlang sym
 #' @export
 ge_plot_gen <- function(trait_df, trait_of_int, min_core = 5) {
   
@@ -30,9 +31,9 @@ ge_plot_gen <- function(trait_df, trait_of_int, min_core = 5) {
       dplyr::select(one_of(c("GENOTYPE", "ENV", trait_of_int))) ->
       sub_df
     
-    ## Here standard evaluation is used (!!rlang::sym())
+    ## Here standard evaluation is used (!!sym())
     dplyr::group_by(sub_df, ENV) %>%
-      dplyr::summarise(Mean = mean(!!rlang::sym(trait_of_int))) %>%
+      dplyr::summarise(Mean = mean(!!sym(trait_of_int))) %>%
       dplyr::arrange(Mean) %>%
       dplyr::mutate(GENOTYPE = "MEAN") ->
       env_order

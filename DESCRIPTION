@@ -9,6 +9,7 @@ Depends: R (>= 3.4.3)
 Imports:
     magrittr,
     dplyr,
+    rlang,
     ggplot2,
     plyr,
     gaston,

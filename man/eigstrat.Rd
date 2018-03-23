@@ -4,7 +4,7 @@
 \alias{eigstrat}
 \title{Perform Eigenstrat marker PCA}
 \usage{
-eigstrat(geno, snps = "rows")
+eigstrat(geno, snps = "rows", nvecs = 25)
 }
 \arguments{
 \item{geno}{A matrix of SNP data encoded in minor-allele dosage format:
@@ -16,14 +16,23 @@ NA = missing data}
 \item{snps}{Either "rows" to indicate that SNPs are in rows and individuals 
 are in columns, or "cols" to indicate the SNPs are in columns and
 individuals are in rows}
+
+\item{nvecs}{Either "all" to return all eigenvectors, or an integer to return
+the first n eigenvectors}
 }
 \value{
-The Eigen decomposition of the input genotypic matrix
+A list with components
+  \item{eigvecs}{Data frame containing the eigenvectors of the input
+  genotypic matrix. The number of output eigenvectors is specified by the
+  nvecs argument}
+  \item{eigvals}{Vector of eigenvalues of the input genotypic matrix}
 }
 \description{
 Perform Eigenstrat marker PCA
 }
 \details{
 This function performs principle component analysis on a matrix of
-  SNP data in the method of EIGENSTRAT (Price et al, 2006; doi:10.1038/ng1847)
+  SNP data in the method of EIGENSTRAT (Price et al, 2006; doi:10.1038/ng1847).
+  Note that while the user can select the number of eigenvectors to return,
+  the function always returns all the eigenvalues.
 }
