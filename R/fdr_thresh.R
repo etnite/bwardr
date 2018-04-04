@@ -29,7 +29,7 @@ fdr_thresh <- function(gwas_results, id, p, meth = "fdr", thresh = 0.05) {
   ## Calculate adjusted p-values.  If no adjusted p-values fall below the
   ## FDR threshold, then set p.thresh and sig.snps to NULL
   p_adj <- p.adjust(gwas_results[[p]], method = meth)
-  if(min(p_adj) > thresh) {
+  if(min(p_adj, na.rm = TRUE) > thresh) {
       cat("No SNP adjusted p-values exceed the FDR threshold of", thresh, "\n")
       p_thresh <- NA
       sig_snps <- NULL
