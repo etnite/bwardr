@@ -3,6 +3,7 @@
 export(bed2mat)
 export(eigstrat)
 export(fdr_thresh)
+export(flip_alleles)
 export(ge_plot_gen)
 export(marker_pca)
 export(stand_str)
