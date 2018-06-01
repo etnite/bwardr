@@ -28,6 +28,7 @@
 #'   the output format, the function will output a table suitable for import to
 #'   R/qtl as the genotypic portion of the "csvs" format (which uses separate
 #'   genotypic and phenotypic tables)
+#' @export
 format_qtlmap_geno <- function(genomat, map, 
                                par_a, par_b, 
                                rm_mono = TRUE, rm_het = TRUE, rm_miss = TRUE, 
