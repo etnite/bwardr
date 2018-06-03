@@ -5,7 +5,7 @@ Title: Brian Ward personal R package
 Description: A package containing functions that I (Brian Ward) often use in
     analyses.
 Author: Brian Ward <brian@brianpward.net>
-Depends: R (>= 3.4.3)
+Depends: R (>= 3.4.0)
 Imports:
     magrittr,
     dplyr,

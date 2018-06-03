@@ -4,20 +4,13 @@
 \alias{format_qtlmap_geno}
 \title{Generate files for QTL mapping}
 \usage{
-format_qtlmap_geno(genomat, map, par_a, par_b, rm_mono = TRUE,
-  rm_het = TRUE, rm_miss = TRUE, out_fmt = "rqtl")
+format_qtlmap_geno(bed, par_a, par_b, rm_mono = TRUE, rm_het = TRUE,
+  rm_miss = TRUE, include_pars = TRUE, out_fmt = "rqtl")
 }
 \arguments{
-\item{genomat}{A matrix or dataframe of SNP data with SNPs in rows and genotypes in
-columns, encoded {0,1,2,NA}, where 0 indicates the homozygous state for one 
-allele, 2 indicates the homozygous state for the alternate allele, 1
-indicates the heterozygous state, and NA indicates missing data. The alleles
-encoded by 0 and 2 for each SNP can be arbitrary. Row names should be
-SNP identifiers, and column names should be genotype identifiers.}
-
-\item{map}{Dataframe containing map information for SNPs in genomat. This 
-should contain the columns "SNP", "CHR", and "DIST" for the SNP ID, 
-chromosome, and genetic distance (if known, or else all 0), respectively}
+\item{bed}{A binary ped (bed) object created with the package 'gaston',
+likely either using the functions gaston::read.bed.matrix() or
+gaston::read.vcf()}
 
 \item{par_a}{String identifying the column in the SNP matrix containing
 data for the first parent.}
@@ -34,6 +27,9 @@ in either parent.}
 \item{rm_miss}{Logical indicating whether to remove SNPs that are missing
 in either parent.}
 
+\item{include_pars}{Logical indicating whether to include the parents in the
+output data}
+
 \item{out_fmt}{String indicating the format of the output table - one of
 either "icimapping" or "rqtl"}
 }
@@ -41,11 +37,7 @@ either "icimapping" or "rqtl"}
 Generate files for QTL mapping
 }
 \details{
-It is strongly recommended that users utilize the read.vcf() function
-  in package 'gaston' to create a binary ped object from an input VCF genotypic
-  file. This binary ped object can then easily be converted into the required
-  input matrix using the command t(as.matrix(bed)). If "rqtl" is selected for
-  the output format, the function will output a table suitable for import to
-  R/qtl as the genotypic portion of the "csvs" format (which uses separate
-  genotypic and phenotypic tables)
+If "rqtl" output format is selected, a table suitable for use as the
+  genotypic portion of the separate, rotated (i.e. "csvsr") R/qtl input
+  format is produced.
 }
