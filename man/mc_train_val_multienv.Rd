@@ -13,18 +13,18 @@ in a column named "ENV". The data can be replicated within environment, and
 can have any additional number of columns.}
 
 \item{prop_val}{Number between 0 and 1 indicating the proportion of phenotypic
-data that should be set to missing.}
+data that should be set to the validation set.}
 
 \item{cv_scheme}{Character string consisting of either "CV1" or "CV2". "CV1"
-introduces missing data by genotype (i.e. simulates introducing new genotypes
-which have not been tested in any environment). CV2 introduces missing data
+assigns validation data by genotype (i.e. simulates introducing new genotypes
+which have not been tested in any environment). CV2 assigns validation data
 by genotype-environment combination (i.e. simulates introducing genotypes into
 new environments).}
 }
 \value{
 A dataframe identical to the input phenotypic dataframe, except with
-  a TRAIN_VAL column added or else re-randomized to indicate training/
-  validation sets.
+  a TRAIN_VAL column added (if not previously present) or else re-randomized 
+  (if the columns was already present) to indicate training/validation sets.
 }
 \description{
 Monte Carlo training/validation splits for multi-environment data
