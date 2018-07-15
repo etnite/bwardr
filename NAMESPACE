@@ -3,6 +3,7 @@
 export(bed2mat)
 export(calc_gmat)
 export(eigstrat)
+export(env_connect)
 export(fdr_thresh)
 export(flip_alleles)
 export(format_qtlmap_geno)
