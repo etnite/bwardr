@@ -24,7 +24,7 @@ flip_alleles <- function(genmat, snps = "rows") {
   if (! snps %in% c("rows", "cols")) {
     stop("Please specify either 'rows' or 'cols' for snps argument")
   }
-  if (min(genmat) < 0 || max(genmat) > 2) {
+  if (min(genmat, na.rm = TRUE) < 0 || max(genmat, na.rm = TRUE) > 2) {
     stop("Input genotypic matrix should be encoded {0, 1, 2}")
   }
   
