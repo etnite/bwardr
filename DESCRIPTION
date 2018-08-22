@@ -14,8 +14,7 @@ Imports:
     stringr,
     ggplot2,
     plyr,
-    gaston,
-    vcfR
+    gaston
 Maintainer: Brian Ward <brian@brianpward.net>
 License: MIT + file LICENSE
 RoxygenNote: 6.1.0

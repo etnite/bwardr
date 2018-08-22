@@ -26,6 +26,6 @@ Perform PCA on marker data
 \details{
 This function performs a "quick and dirty" principle component 
   analysis on the input matrix of SNP data. A genetic relationship matrix
-  is calculated first, and then an Eigen decomposition is performed in this
+  is calculated first, and then an Eigen decomposition is performed on this
   matrix
 }
