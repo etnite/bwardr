@@ -66,3 +66,13 @@ plot(chr1a$dist ~ chr1a$pos,
 ```
 
 Note that the genetic position of the fitted data now uniformly increases as the physical position increases.
+
+## Negative values
+
+Finally, some genetic distances for markers near the beginning of a chromosome may be negative depending on the fit of the regression. Below we count the number of markers with negative genetic distances on each chromosome, and then set the distances to 0:
+```{r negative distances}
+neg_cm <- mono_map[mono_map$dist < 0, ]
+table(neg_cm$chr)
+mono_map$dist[mono_map$dist < 0] <- 0
+```
+
