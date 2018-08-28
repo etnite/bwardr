@@ -1,3 +1,4 @@
 *.~lock*
 *.Rhistory
 temp/*
+inst/doc
