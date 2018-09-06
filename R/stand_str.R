@@ -3,6 +3,8 @@
 #' @param str_in Character vector
 #' @param word_delim Character defining the word delimiter for the output character
 #'   vector, either " " (space), ".", "-", or "_"
+#' @param case String consisting of either "upper" or "lower" to select whether
+#'   to convert output to all uppercase or all lowercase
 #' @return character vector of same dimensions as input vector, but with all
 #'   elements updated to the new format
 #' @details This function somewhat crudely attempts to force character vectors
@@ -14,7 +16,7 @@
 #'   VCFs in PLINK, as they will by default be interpreted as delimiters for
 #'   family and individual IDs
 #' @export
-stand_str <- function(str_in, word_delim = "-") {
+stand_str <- function(str_in, word_delim = "-", case = "upper") {
   
   ## Check for appropriate word delimiter selection
   if(!word_delim %in% c(" ", "-", "_", ".")) {
@@ -22,8 +24,12 @@ stand_str <- function(str_in, word_delim = "-") {
          " " [space], ".", "-", "_"')
   }
   
-  ## Convert everything to uppercase
-  str_out <- toupper(str_in)
+  ## Convert case
+  if (case == "upper") {
+      str_out <- toupper(str_in)
+  } else if (case == "lower") {
+      str_out <- tolower(str_in)
+  }
   
   ## Remove leading/trailing whitespace
   str_out <- trimws(str_out, which = "both")

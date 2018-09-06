@@ -4,13 +4,16 @@
 \alias{stand_str}
 \title{Standardize character vectors to a common format}
 \usage{
-stand_str(str_in, word_delim = "-")
+stand_str(str_in, word_delim = "-", case = "upper")
 }
 \arguments{
 \item{str_in}{Character vector}
 
 \item{word_delim}{Character defining the word delimiter for the output character
 vector, either " " (space), ".", "-", or "_"}
+
+\item{case}{String consisting of either "upper" or "lower" to select whether
+to convert output to all uppercase or all lowercase}
 }
 \value{
 character vector of same dimensions as input vector, but with all

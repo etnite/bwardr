@@ -1,5 +1,9 @@
 #' Calculate Realized Genomic Relationship Matrices
 #'
+#' @param data Dataframe or matrix with individuals in rows and markers in columns.
+#'   Markers should beencoded in minor-allele dosage format
+#'   (i.e. 0 = homozygous for major allele, 1 = heterozygous, 2 = homozygous
+#'   for minor allele).
 #' @param method Integer from 1 to 4 used to select the method to use for
 #' calculating the matrix. Available methods are:
 #'   1 - observed allele frequencies (GOF, VanRaden, 2008)
@@ -7,10 +11,6 @@
 #'       (GD, Forni et al., 2011)
 #'   3 - allele frequencies fixed at 0.5 (G05, Forni et al., 2011)
 #'   4 - allele frequencies fixed at mean for each locus (G05, Forni et al., 2011)
-#' @param data Dataframe or matrix with individuals in rows and markers in columns.
-#'   Markers should beencoded in minor-allele dosage format
-#'   (i.e. 0 = homozygous for major allele, 1 = heterozygous, 2 = homozygous
-#'   for minor allele).
 #' @return The full realized genetic relationship matrix (G)
 #' @details This function is adapted from an example from Chapter 11 of
 #'   Genetic Data Analysis for Plant and Animal Breeding, by Isik, Holland and
@@ -20,7 +20,7 @@
 #'   relationships. This function only returns the realized genetic relationship
 #'   matrix.
 #' @export
-calc_gmat <- function(method, data) {
+calc_gmat <- function(data, method = 1) {
 
   ## Sanity check on supplied method integer
   if (!method %in% c(1, 2, 3, 4)) {

@@ -4,9 +4,14 @@
 \alias{calc_gmat}
 \title{Calculate Realized Genomic Relationship Matrices}
 \usage{
-calc_gmat(method, data)
+calc_gmat(data, method = 1)
 }
 \arguments{
+\item{data}{Dataframe or matrix with individuals in rows and markers in columns.
+Markers should beencoded in minor-allele dosage format
+(i.e. 0 = homozygous for major allele, 1 = heterozygous, 2 = homozygous
+for minor allele).}
+
 \item{method}{Integer from 1 to 4 used to select the method to use for
 calculating the matrix. Available methods are:
   1 - observed allele frequencies (GOF, VanRaden, 2008)
@@ -14,11 +19,6 @@ calculating the matrix. Available methods are:
       (GD, Forni et al., 2011)
   3 - allele frequencies fixed at 0.5 (G05, Forni et al., 2011)
   4 - allele frequencies fixed at mean for each locus (G05, Forni et al., 2011)}
-
-\item{data}{Dataframe or matrix with individuals in rows and markers in columns.
-Markers should beencoded in minor-allele dosage format
-(i.e. 0 = homozygous for major allele, 1 = heterozygous, 2 = homozygous
-for minor allele).}
 }
 \value{
 The full realized genetic relationship matrix (G)
