@@ -4,20 +4,27 @@
 \alias{randomize_headrows}
 \title{Randomize Headrow Trays}
 \usage{
-randomize_headrows(ents, nreps, tray_cells = 80, tray_cols = 4,
-  checks = list("CHECK", 40), seed = NA)
+randomize_headrows(ents, nreps = 1, tray_cells = 80, tray_rows = 4,
+  start_cell = 1, randomize_first = TRUE, checks = list("CHECK", 40),
+  seed = NA)
 }
 \arguments{
-\item{ents}{A vector listing names of entries to include in the experiment}
+\item{ents}{Vector listing names of entries to include in the experiment}
 
-\item{nreps}{An integer specifying the number of replications 
+\item{nreps}{Integer specifying the number of replications 
 (i.e. full blocks)}
 
-\item{tray_cells}{An integer specifying the number of cells contained by each
+\item{tray_cells}{Integer specifying the number of cells contained by each
 headrow tray}
 
-\item{tray_cols}{An integer specifying the number of columns in a headrow
-tray}
+\item{tray_rows}{Integer specifying the number of rows per range. Note that
+this "rows" is shorthand for \emph{headrows}, so this might more 
+intuitively be thought of as columns.}
+
+\item{start_cell}{Integer specifying the starting number for the first cell}
+
+\item{randomize_first}{Logical indicating whether or not to randomize the
+first replication}
 
 \item{checks}{A list with two elements:
 \enumerate{
@@ -26,7 +33,8 @@ tray}
   \item An integer specifying how often to repeat the checks  
 }}
 
-\item{seed}{An optional integer to seed the random number generator}
+\item{seed}{Integer to seed the random number generator. Default NA value
+will not seed the random number generator.}
 }
 \value{
 A dataframe containing the randomized headrows and all pertinent
@@ -41,6 +49,9 @@ The headrows will be returned with randomized replications of
   at regular intervals. Note that this returns a linear arrangement of trays
   with global range values increasing to infinity (i.e., the headrow trays
   are not wrapped at the length of the experiment field). Checks are first 
-  inserted at the beginning (i.e. tray 1, range 1, col 1), and then repeated 
-  at the specified number of cells.
+  inserted at the beginning (i.e. tray 1, range 1, row 1), and then repeated 
+  at the specified number of cells. As noted above, the somewhat unfortunate
+  nomenclature of head\emph{rows} means that what would intuitively be
+  thought of as "rows" are labeled "ranges", and what would intuitively be
+  thought of as "columns" are labeled "rows".
 }
