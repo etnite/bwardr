@@ -24,8 +24,9 @@
 #'   inserted at the beginning (i.e. tray 1, range 1, col 1), and then repeated 
 #'   at the specified number of cells.
 #' @export
-randomize_headrows <- function(ents, nreps, tray_cells = 80, tray_cols = 4,
-                               checks = list("CHECK", 40), seed = NA) {
+randomize_headrows <- function(ents, nreps = 1, tray_cells = 80, tray_cols = 4,
+                               start_cell = 1, checks = list("CHECK", 40), 
+                               seed = NA) {
 
   if (!is.na(seed)) { set.seed(seed) }
   
@@ -83,15 +84,16 @@ randomize_headrows <- function(ents, nreps, tray_cells = 80, tray_cols = 4,
   ## Now add in additional identifying columns
   ntrays <- ceiling(nrow(headrows) / tray_cells)
   headrows$tray <- rep(1:ntrays, each = tray_cells)[1:nrow(headrows)]
-  headrows$cell <- rep_len(1:tray_cells, length.out = nrow(headrows))
+  headrows$tray_cell <- rep_len(1:tray_cells, length.out = nrow(headrows))
   headrows$col <- rep_len(1:tray_cols, length.out = nrow(headrows))
   nrange <- tray_cells / tray_cols
   range_vec <- rep(1:nrange, each = tray_cols)
-  headrows$range <- rep_len(range_vec, length.out = nrow(headrows))
-  headrows$global_range <- rep(1:(ntrays*nrange), each = tray_cols)[1:nrow(headrows)]
+  headrows$tray_range <- rep_len(range_vec, length.out = nrow(headrows))
+  headrows$exp_range <- rep(1:(ntrays*nrange), each = tray_cols)[1:nrow(headrows)]
+  headrows$exp_cell <- seq(1:nrow(headrows)) + start_cell - 1
   
   ## Rearrange columns and return
-  headrows <- headrows[c("rep", "tray", "range", "global_range", "col", "cell", 
-                         "entry_type", "entry")]
+  headrows <- headrows[c("rep", "tray", "tray_range", "exp_range", "col", 
+                         "tray_cell", "exp_cell", "entry_type", "entry")]
   return(headrows)
 }
