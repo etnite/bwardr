@@ -50,7 +50,7 @@ format_qtlmap_geno <- function(bed,
   ## The integer 0 is assigned as the parent A allele, and 2 as the parent B allele
   ## This requires "flipping" some SNPs
   ## After this, parent B should only have the 0 allele when a SNP is monomorphic
-  genomat <- as.data.frame(t(gaston::as.matrix(bed)))
+  genomat <- as.data.frame(t(as.matrix(bed)))
   flip <- rownames(genomat[genomat[[par_a]] == 2, ])
   genomat[flip, ] <- genomat[flip, ] - 2
   genomat <- abs(genomat)

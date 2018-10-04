@@ -8,13 +8,7 @@ Author: Brian Ward <brian@brianpward.net>
 Depends: R (>= 3.4.0)
 Imports:
     Matrix,
-    magrittr,
-    dplyr,
-    rlang,
-    stringr,
-    ggplot2,
-    plyr,
-    gaston
+    stringr
 Maintainer: Brian Ward <brian@brianpward.net>
 License: MIT + file LICENSE
 RoxygenNote: 6.1.0
@@ -22,5 +16,6 @@ Encoding: UTF-8
 LazyData: true
 Suggests: knitr,
     rmarkdown,
+    gaston,
     MonoPoly
 VignetteBuilder: knitr
