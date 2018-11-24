@@ -33,6 +33,10 @@
 kasp_consensus <- function(kasp, geno_col, data_cols, 
                            ambiguous = "strict", out_format = "KASP") {
   
+  ## Sanity checks
+  stopifnot(out_format %in% c("KASP", "VCF", "numeric"))
+  stopifnot(ambiguous %in% c("strict", "lax"))
+  
   ## Split input data frame into genotypes column and data columns;
   ## convert data columns into vector
   genos <- kasp[, geno_col]
@@ -83,21 +87,21 @@ kasp_consensus <- function(kasp, geno_col, data_cols,
   for (i in data_cols) {
     k_dat[[i]][hets_sum[[i]] == 0] <- 0
   }
+  k_dat[k_dat < 0] <- -1
+  k_dat[k_dat > 0] <- 1
   
   ## Convert to selected output format
+  ## If "numeric" is selected for out_format, then k_dat is unchanged
   if (out_format == "KASP") {
-    k_dat[k_dat < 0] <- "X:X"
-    k_dat[k_dat > 0] <- "Y:Y"
+    k_dat[k_dat == -1] <- "X:X"
+    k_dat[k_dat == 1] <- "Y:Y"
     k_dat[k_dat == 0] <- "X:Y"
     k_dat[is.na(k_dat)] <- "NO CALL"
   } else if (out_format == "VCF") {
-    k_dat[k_dat < 0] <- "0/0"
-    k_dat[k_dat > 0] <- "1/1"
+    k_dat[k_dat == -1] <- "0/0"
+    k_dat[k_dat == 1] <- "1/1"
     k_dat[k_dat == 0] <- "0/1"
     k_dat[is.na(k_dat)] <- "./."
-  } else if (out_format == "numeric") {
-    k_dat[k_dat < 0] <- -1
-    k_dat[k_dat > 0] <- 1
   }
   
   ## Recombine to produce the final output df
