@@ -106,6 +106,6 @@ kasp_consensus <- function(kasp, geno_col, data_cols,
   
   ## Recombine to produce the final output df
   out_df <- data.frame(genos, k_dat, stringsAsFactors = FALSE)
-  names(out_df)[names(out_df) == "Line"] <- geno_col
+  names(out_df)[names(out_df) == "genos"] <- geno_col
   return(out_df)
 }
