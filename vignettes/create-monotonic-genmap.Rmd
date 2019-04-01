@@ -20,31 +20,31 @@ The 'bwardr' package includes two genetic map files for the International Wheat 
 
 ## Packages and Data
 
-We will require the synop_dh88 data from package 'bwardr', as well as the package 'MonoPoly' to perform the monotonic regression.
+We will require the synop_dh92 data from package 'bwardr', as well as the package 'MonoPoly' to perform the monotonic regression. Note that the Synthetic x Opata population of 906 recombinant inbred lines (synop_ril906) map has fewer markers, but is generally "smoother" than the smaller population of DH lines that we use here.
 ```{r packages and data}
 library(bwardr)
 library(MonoPoly)
-data("synop_dh88")
-str(synop_dh88)
+data("synop_dh92")
+str(synop_dh92)
 ```
 
 ## Raw data plot
 
-Below is a plot of the raw genetic map for chromosome 1A.
+Below is a plot of the raw genetic map for chromosome 1B.
 ```{r plot raw data}
-chr1a <- synop_dh88[synop_dh88$chr == "1A", ]
-plot(chr1a$dist ~ chr1a$pos, 
+chr1b <- synop_dh92[synop_dh92$chr == "1B", ]
+plot(chr1b$dist ~ chr1b$pos, 
      xlab = "Physical Position (bp)", 
      ylab = "Genetic Position (cM)")
 ```
 
-Note that there are several "knots" in the plot, where the genetic distance decreases from one marker to the next.
+Note that there are a few "knots" in the plot, where the genetic distance decreases from one marker to the next.
 
 ## Monotonic regression
 
 We can split the map by chromosome, and then run the monotonic regression for each chromosome. The degree argument of the monpol() function controls the degree of the fit polynomial. Here we use a degree of 9, which appears to suitably capture the curvature. The individual chromosomes are recombined, and the "dist" column (genetic distance) is replaced by the fitted values.
 ```{r chrom regressions}
-maplist <- split(synop_dh88, synop_dh88$chr)
+maplist <- split(synop_dh92, synop_dh92$chr)
 for (i in names(maplist)) {
   monreg <- monpol(dist ~ pos, data = maplist[[i]], degree = 9)
   maplist[[i]]$fitted <- as.vector(predict(monreg, newdata = maplist[[i]], scale = "original"))
@@ -57,10 +57,10 @@ mono_map$fitted <- NULL
 
 ## Fitted values plot
 
-Below is a plot of the physical position vs. the fitted genetic position values for chromosome 1A:
+Below is a plot of the physical position vs. the fitted genetic position values for chromosome 1B:
 ```{r plot fitted vals}
-chr1a <- mono_map[mono_map$chr == "1A", ]
-plot(chr1a$dist ~ chr1a$pos, 
+chr1b <- mono_map[mono_map$chr == "1B", ]
+plot(chr1b$dist ~ chr1b$pos, 
      xlab = "Physical Position (bp)", 
      ylab = "Genetic Position (cM)")
 ```
@@ -69,10 +69,9 @@ Note that the genetic position of the fitted data now uniformly increases as the
 
 ## Negative values
 
-Finally, some genetic distances for markers near the beginning of a chromosome may be negative depending on the fit of the regression. Below we count the number of markers with negative genetic distances on each chromosome, and then set the distances to 0:
+Finally, some genetic distances for markers near the beginning of a chromosome may be negative depending on the fit of the regression. Below we count the number of markers with negative genetic distances on each chromosome, and then set the distances to 0. Chromosome 7A has the greatest number of markers with negative distances, though they still are a relatively small overall proportion of the total.
 ```{r negative distances}
 neg_cm <- mono_map[mono_map$dist < 0, ]
 table(neg_cm$chr)
 mono_map$dist[mono_map$dist < 0] <- 0
 ```
-
