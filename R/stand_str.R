@@ -34,9 +34,6 @@ stand_str <- function(str_in, word_delim = "-", case = "upper") {
   ## Remove leading/trailing whitespace
   str_out <- trimws(str_out, which = "both")
   
-  ## Replace emdashes with hyphens
-  str_out <- gsub("--", "-", str_out, fixed = TRUE)
-  
   ## Remove comment characters
   str_out <- gsub("#", "", str_out, fixed = TRUE)
   
@@ -46,7 +43,16 @@ stand_str <- function(str_in, word_delim = "-", case = "upper") {
   ## Remove non-ASCII characters
   str_out <- iconv(str_out, "latin1", "ASCII", sub="")
   
-  ## Swap out whitespace, dash, period, underscore for selected delimiter
+  ## Convert all delimiters to dashes
+  str_out <- gsub("\\s|-|\\.|_", "-", str_out)
+  
+  ## Replace repeated dashes with single
+  str_out <- gsub("-+", "-", str_out)
+  
+  ## Remove leading/trailing dashes
+  str_out <- gsub("^-|-$", "", str_out)
+  
+  ## Convert dashes to final delimiter choice
   str_out <- gsub("\\s|-|\\.|_", word_delim, str_out)
   
   return(str_out)
