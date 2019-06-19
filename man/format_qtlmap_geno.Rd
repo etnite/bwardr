@@ -4,8 +4,8 @@
 \alias{format_qtlmap_geno}
 \title{Generate files for QTL mapping}
 \usage{
-format_qtlmap_geno(bed, par_a, par_b, rm_mono = TRUE, rm_het = TRUE,
-  rm_miss = TRUE, include_pars = TRUE, out_fmt = "rqtl")
+format_qtlmap_geno(bed, par_a, par_b, rm_het = TRUE, rm_miss = TRUE,
+  include_pars = TRUE, out_fmt = "rqtl")
 }
 \arguments{
 \item{bed}{A binary ped (bed) object created with the package 'gaston',
@@ -17,9 +17,6 @@ data for the first parent.}
 
 \item{par_b}{String identifying the column in the SNP matrix containing 
 data for the second parent.}
-
-\item{rm_mono}{Logical indicating whether to remove SNPs that are monomorphic
-between the two parents.}
 
 \item{rm_het}{Logical indicating whether to remove SNPs that are heterozygous
 in either parent.}
@@ -33,11 +30,20 @@ output data}
 \item{out_fmt}{String indicating the format of the output table - one of
 either "icimapping" or "rqtl"}
 }
+\value{
+list with components
+  \item{abh}{Dataframe in A/B/H format (see details)}
+  \item{flipped}{Character vector consisting of IDs of SNPs with flipped alleles}
+}
 \description{
 Generate files for QTL mapping
 }
 \details{
-If "rqtl" output format is selected, a table suitable for use as the
-  genotypic portion of the separate, rotated (i.e. "csvsr") R/qtl input
-  format is produced.
+This function will always remove SNPs that are monomorphic between
+  the two parents, SNPs with missing data in both parents, and SNPs with 
+  with missing data in one parent and a heterozygous call in the other. The
+  user can optionally specify whether to remove SNPs with missing data for
+  either parent, or heterozygous calls in either parent. If "rqtl" output 
+  format is selected, a table suitable for use as the genotypic portion of 
+  the separate, rotated (i.e. "csvsr") R/qtl input format is produced.
 }
