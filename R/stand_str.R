@@ -40,6 +40,9 @@ stand_str <- function(str_in, word_delim = "-", case = "upper") {
   ## Convert asterices to dashes
   str_out <- gsub("*", "-", str_out, fixed = TRUE)
   
+  ## Convert newlines to dashes
+  str_out <- gsub("[\r\n]", "-", str_out)
+  
   ## Remove non-ASCII characters
   str_out <- iconv(str_out, "latin1", "ASCII", sub="")
   
