@@ -24,20 +24,16 @@ flip_alleles <- function(genmat, snps = "rows") {
   if (! snps %in% c("rows", "cols")) {
     stop("Please specify either 'rows' or 'cols' for snps argument")
   }
-  if (min(genmat, na.rm = TRUE) < 0 || max(genmat, na.rm = TRUE) > 2) {
+  if (!all(genmat %in% c(0, 1, 2))) {
     stop("Input genotypic matrix should be encoded {0, 1, 2}")
   }
   
-  ## These lines first shift SNPs to (-1, 0, 1) to make use of rowSums(),
-  ## Then shift SNPs to (0, 1, 2) or (0, -1, -2)
-  ## depending on which allele is minor
-  ## Then the absolute value is taken to normalize to 0 = major, 2 = minor
-  genmat <- genmat - 1
+  ## These lines transpose matrix if necessary
+  ## Then, for any row (i.e. SNP) with mean > 1, 2 is subtracted, and
+  ## the absolute value is taken
   if (snps == "cols") {genmat <- t(genmat)}
-  allele_count <- rowSums(genmat, na.rm = TRUE)
-  genmat[allele_count <= 0, ] <- genmat[allele_count <= 0, ] + 1
-  genmat[allele_count > 0, ] <- genmat[allele_count > 0, ] - 1
-  genmat <- abs(genmat)
+  snp_means <- rowMeans(genmat, na.rm = TRUE)
+  genmat[snp_means > 1, ] <- abs(genmat[snp_means > 1, ] - 2)
   if (snps == "cols") {genmat <- t(genmat)}
   
   return(genmat)
