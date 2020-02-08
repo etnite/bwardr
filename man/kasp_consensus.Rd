@@ -4,8 +4,13 @@
 \alias{kasp_consensus}
 \title{Generate consensus calls for KASP marker data}
 \usage{
-kasp_consensus(kasp, geno_col, data_cols, ambiguous = "strict",
-  out_format = "KASP")
+kasp_consensus(
+  kasp,
+  geno_col,
+  data_cols,
+  ambiguous = "strict",
+  out_format = "KASP"
+)
 }
 \arguments{
 \item{kasp}{A dataframe containing KASP-formatted marker data. This should

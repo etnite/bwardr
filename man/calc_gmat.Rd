@@ -4,7 +4,7 @@
 \alias{calc_gmat}
 \title{Calculate Realized Genomic Relationship Matrices}
 \usage{
-calc_gmat(data, method = 1)
+calc_gmat(data, method = "GOF")
 }
 \arguments{
 \item{data}{Dataframe or matrix with individuals in rows and markers in columns.

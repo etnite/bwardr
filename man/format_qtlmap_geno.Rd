@@ -4,8 +4,15 @@
 \alias{format_qtlmap_geno}
 \title{Generate files for QTL mapping}
 \usage{
-format_qtlmap_geno(bed, par_a, par_b, rm_het = TRUE, rm_miss = TRUE,
-  include_pars = TRUE, out_fmt = "rqtl")
+format_qtlmap_geno(
+  bed,
+  par_a,
+  par_b,
+  rm_het = TRUE,
+  rm_miss = TRUE,
+  include_pars = TRUE,
+  out_fmt = "rqtl"
+)
 }
 \arguments{
 \item{bed}{A binary ped (bed) object created with the package 'gaston',

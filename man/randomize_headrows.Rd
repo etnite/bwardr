@@ -4,9 +4,16 @@
 \alias{randomize_headrows}
 \title{Randomize Headrow Trays}
 \usage{
-randomize_headrows(ents, nreps = 1, tray_cells = 80, tray_rows = 4,
-  start_cell = 1, randomize_first = TRUE, checks = list("CHECK", 40),
-  seed = NA)
+randomize_headrows(
+  ents,
+  nreps = 1,
+  tray_cells = 80,
+  tray_rows = 4,
+  start_cell = 1,
+  randomize_first = TRUE,
+  checks = list("CHECK", 40),
+  seed = NA
+)
 }
 \arguments{
 \item{ents}{Vector listing names of entries to include in the experiment}
