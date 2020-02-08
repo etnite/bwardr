@@ -21,9 +21,9 @@
 #'   relationships. This function only returns the realized genetic relationship
 #'   matrix.
 #' @export
-calc_gmat <- function(data, method = 1) {
+calc_gmat <- function(data, method = "GOF") {
 
-  ## Sanity check on supplied method integer
+  ## Sanity check on supplied method
   if (!method %in% c("GOF", "GD", "G05", "GM")) {
     stop("Please select 'GOF', 'GD', 'G05', or 'GM' for G matrix calculation method")
   }
