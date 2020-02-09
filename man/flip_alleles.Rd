@@ -11,25 +11,32 @@ flip_alleles(genmat, snps = "rows")
 as {0, 1, 2}. Can be in either orientation (SNPs x individuals or
 individuals x SNPs)}
 
-\item{snps}{Either "rows" to indicate that SNPs are in rows and individuals 
+\item{snps}{Either "rows" to indicate that SNPs are in rows and individuals
 are in columns, or "cols" to indicate the SNPs are in columns and
 individuals are in rows}
 }
 \value{
-Numeric matrix of same dimensions as input matrix, but with all SNPs
-  encoded in proper minor-allele dosage format
+List containing the following elements:
+\itemize{
+\item dosmat - NumericSNP  matrix in minor-allele dosage format
+\item flipped_loci - Vector listing markers for which alleles were flipped
+}
 }
 \description{
 Flip alleles in a minor-allele dosage matrix
 }
 \details{
 SNP data is often stored in numeric matrices in minor-allele dosage
-  format, where 0 indicates no copies of the minor allele (i.e. homozygous
-  for the major allele), 1 indicates 1 copy of the minor allele (i.e.
-  heterozygous), and 2 indicates 2 copies of the minor allele (i.e.
-  homozygous for the minor allele). However, there are situations in which
-  the alleles get "flipped" between major vs. minor (e.g. when subsetting
-  or filtering genotypic data). flip_alleles() is intended to selectively
-  reset SNPs which have become flipped to the proper minor-allele dosage
-  orientation.
+format, where 0 indicates no copies of the minor allele (i.e. homozygous
+for the major allele), 1 indicates 1 copy of the minor allele (i.e.
+heterozygous), and 2 indicates 2 copies of the minor allele (i.e.
+homozygous for the minor allele). However, there are situations in which
+the alleles get "flipped" between major vs. minor (e.g. when subsetting
+or filtering genotypic data). In addition, SNPs may be numerically encoded
+in various ways, e.g. by encoding the allele in the reference genome as
+0, and the alternate allele as 2. flip_alleles() is intended to selectively
+"flip" SNPs into the proper minor-allele dosage orientation.
+}
+\seealso{
+gt2num
 }

@@ -8,14 +8,17 @@
 #' @details This function will convert a matrix of genotype calls from a VCF file
 #'   into numeric format. It will convert homozygous reference allele calls to 0,
 #'   heterozygous calls to 1, and homozygous alternate allele calls to 2.
-#'   Note that the output IS NOT in minor-allele dosage format. See ?flip_alleles. 
-#'   Loci with more than two alleles will be removed and reported. An input matrix
-#'   of the required format can be generated with vcfR::extract.gt(), with
-#'   bcftools query, or manually in R.
+#'   Note that the output IS NOT necessarily in minor-allele dosage format. 
+#'   See ?flip_alleles for more details. Loci with more than two alleles will 
+#'   be removed and reported. An input matrix of the required format can be 
+#'   generated with vcfR::extract.gt(), with bcftools query, or manually in R.
+#' @seealso flip_alleles
 #' @md
 gt2num <- function(genomat) {
   
-  stopifnot(is.matrix(genomat))
+  if (!is.matrix(genomat)) {
+    stop("genomat parameter must be a matrix")
+  }
 
   ## Define genotypes
   refs <- c("0/0", "0|0")
