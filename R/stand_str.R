@@ -1,8 +1,8 @@
 #' Standardize character vectors to a common format
 #' 
 #' @param str_in Character vector
-#' @param word_delim Character defining the word delimiter for the output character
-#'   vector, either " " (space), ".", "-", or "_"
+#' @param sep Character defining the word delimiter for the output character
+#'   vector, either " " (space), ".", "-", "_", or "" (no delimiter)
 #' @param case String consisting of either "upper" or "lower" to select whether
 #'   to convert output to all uppercase or all lowercase
 #' @return character vector of same dimensions as input vector, but with all
@@ -16,12 +16,12 @@
 #'   VCFs in PLINK, as they will by default be interpreted as delimiters for
 #'   family and individual IDs
 #' @export
-stand_str <- function(str_in, word_delim = "-", case = "upper") {
+stand_str <- function(str_in, sep = "-", case = "upper") {
   
   ## Check for appropriate word delimiter selection
-  if(!word_delim %in% c(" ", "-", "_", ".")) {
+  if(!sep %in% c(" ", "-", "_", ".", "")) {
     stop('Please select one of the following for the output word delimiter:
-         " " [space], ".", "-", "_"')
+         " " [space], ".", "-", "_", "" [no delimiter]')
   }
   
   ## Convert case
@@ -46,7 +46,7 @@ stand_str <- function(str_in, word_delim = "-", case = "upper") {
   ## Remove non-ASCII characters
   str_out <- iconv(str_out, "latin1", "ASCII", sub="")
   
-  ## Convert all delimiters to dashes
+  ## Convert all delimiters (except no delimiter) to dashes
   str_out <- gsub("\\s|-|\\.|_", "-", str_out)
   
   ## Replace repeated dashes with single
@@ -56,7 +56,7 @@ stand_str <- function(str_in, word_delim = "-", case = "upper") {
   str_out <- gsub("^-|-$", "", str_out)
   
   ## Convert dashes to final delimiter choice
-  str_out <- gsub("\\s|-|\\.|_", word_delim, str_out)
+  str_out <- gsub("\\s|-|\\.|_", sep, str_out)
   
   return(str_out)
 }
