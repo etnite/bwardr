@@ -1,6 +1,6 @@
 Package: bwardr
 Version: 0.1
-Date: 2018-02-13
+Date: 2020-02-16
 Title: Brian Ward personal R package
 Description: A package containing functions that I (Brian Ward) often use in
     analyses.
@@ -17,5 +17,6 @@ LazyData: true
 Suggests: knitr,
     rmarkdown,
     gaston,
-    MonoPoly
+    MonoPoly,
+    coop
 VignetteBuilder: knitr

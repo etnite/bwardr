@@ -35,4 +35,22 @@ This function performs principle component analysis on a matrix of
   SNP data in the method of EIGENSTRAT (Price et al, 2006; doi:10.1038/ng1847).
   Note that while the user can select the number of eigenvectors to return,
   the function always returns all the eigenvalues.
+  
+  The rate limiting step in this function is the calculation of a covariance
+  matrix. This can be sped up by using the covar() function from the 'coop'
+  package. The function will check if coop is installed, and use it if so,
+  otherwise falling back on the base cov() function. Note that the performance
+  of the coop package is dependent upon the BLAS library used on the system.
+  On Linux systems, (in this example Ubuntu-flavored), OpenBlas can be installed
+  and selected for use in a terminal:
+  
+  \code{sudo apt install libopenblas-dev}
+  \code{sudo update-alternatives --config libblas.so.3}
+  
+  On Windows and Mac, Microsoft R Open may be used, as it includes
+  the IntelMKL library.
+  
+  For large datasets, it is probably a good idea to use a higher-performance
+  method for performing PCA, such as the SNPRelate package, or else use
+  Eigensoft, GCTA, PLINK, etc.
 }
