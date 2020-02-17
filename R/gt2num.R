@@ -14,6 +14,7 @@
 #'   generated with vcfR::extract.gt(), with bcftools query, or manually in R.
 #' @seealso flip_alleles
 #' @md
+#' @export
 gt2num <- function(genomat) {
   
   if (!is.matrix(genomat)) {
