@@ -43,6 +43,6 @@ gt2num <- function(genomat) {
   }
   
   ## Construct and return output list
-  out_list <- list("genomat" = as.numeric(genomat), "removed_loci" = removed_loci)
-  return(out_list)
+  class(genomat) <- "numeric"
+  return(list("genomat" = genomat, "removed_loci" = removed_loci))
 }
