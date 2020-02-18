@@ -56,7 +56,8 @@ eigstrat <- function(geno, snps = "rows", nvecs = 25) {
   
   ## Set NAs to 0; Perform Eigen decomposition on covariance matrix
   geno[is.na(geno)] <- 0
-  if (exists("tcovar", where = "package:coop", mode = "function")) {
+  pfind <- find.package("coop", quiet = TRUE)
+  if (length(pfind) > 0) {
       eig <- eigen(coop::tcovar(geno))
   } else {
       eig <- eigen(cov(t(geno)))
