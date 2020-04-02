@@ -1,6 +1,8 @@
 # bwardr
 
 Author: [Brian Ward](https://brianpward.net/)  
+Email: [brian@brianpward.net](mailto:brian@brianpward.net)  
+Github: [etnite](https://github.com/etnite)  
 License: [MIT](https://opensource.org/licenses/MIT)
 
 [![Travis build status](https://travis-ci.org/etnite/bwardr.svg?branch=master)](https://travis-ci.org/etnite/bwardr)
