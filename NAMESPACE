@@ -2,6 +2,7 @@
 
 export(calc_gmat)
 export(clean_dvec)
+export(color_bar)
 export(eigstrat)
 export(env_connect)
 export(fdr_thresh)
