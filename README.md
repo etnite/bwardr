@@ -20,7 +20,7 @@ Or to install with vignettes:
 
 ```r
 library(devtools)
-install_github("etnite/bwardr", build = TRUE, build_opts = c("--no-resave-data", "--no-manual"))
+install_github("etnite/bwardr", build_vignettes = TRUE)
 ```
 
 ## Functionality
