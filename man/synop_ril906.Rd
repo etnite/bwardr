@@ -4,13 +4,15 @@
 \name{synop_ril906}
 \alias{synop_ril906}
 \title{Synthetic x Opata genetic map, 906 RIL lines}
-\format{A data frame with 4,027 rows and 3 variables:
+\format{
+A data frame with 4,027 rows and 3 variables:
 \describe{
    \item{chr}{chromosome name}
    \item{id}{SNP identifier}
    \item{dist}{genetic position, in centiMorgans (cM)}
    \item{pos}{phyiscal position, in base pairs (bp)}
-}}
+}
+}
 \source{
 \url{https://doi.org/10.1038/s41598-018-38111-3}
 }

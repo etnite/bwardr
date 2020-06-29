@@ -4,13 +4,15 @@
 \name{synop_dh92}
 \alias{synop_dh92}
 \title{Synthetic x Opata genetic map, 92 DH lines}
-\format{A data frame with 7,742 rows and 4 variables:
+\format{
+A data frame with 7,742 rows and 4 variables:
 \describe{
    \item{chr}{chromosome name}
    \item{id}{SNP identifier}
    \item{dist}{genetic position, in centiMorgans (cM)}
    \item{pos}{phyiscal position, in base pairs (bp)}
-}}
+}
+}
 \source{
 \url{https://doi.org/10.1038/s41598-018-38111-3}
 }
