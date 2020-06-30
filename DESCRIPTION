@@ -9,8 +9,7 @@ Depends: R (>= 3.4.0)
 Imports:
     Matrix,
     stringr,
-    lme4,
-    arm
+    lme4
 Maintainer: Brian Ward <brian@brianpward.net>
 License: MIT + file LICENSE
 RoxygenNote: 7.1.0
