@@ -15,8 +15,8 @@
 #'   applications where the traditional entry-mean heritability calculation will 
 #'   give biased estimates. The method of doing this using lme4 is detailed by 
 #'   Ben Bolker at \url{https://stackoverflow.com/questions/38697477/mean-variance-of-a-difference-of-blues-or-blups-in-lme4}.
-#'   This method yields values that are slightly different (1% - 2%) from
-#'   ASReml-R's results. Another solution I came across at 
+#'   This method yields values that are slightly different (I have observed up to
+#'   0.75%) from ASReml-R's results. Another solution I came across at 
 #'   \url{https://shantel-martinez.github.io/resources.html} seems to produce
 #'   results that are more divergent from ASReml-R's.
 #' @export
