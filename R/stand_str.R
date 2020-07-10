@@ -24,27 +24,24 @@ stand_str <- function(str_in, sep = "-", case = "upper") {
          " " [space], ".", "-", "_", "" [no delimiter]')
   }
   
+  ## Remove all non-ASCII characters
+  str_out <- iconv(str_in, "latin1", "ASCII", sub="")
+  
   ## Convert case
   if (case == "upper") {
-      str_out <- toupper(str_in)
+      str_out <- toupper(str_out)
   } else if (case == "lower") {
-      str_out <- tolower(str_in)
+      str_out <- tolower(str_out)
   }
   
   ## Remove leading/trailing whitespace
   str_out <- trimws(str_out, which = "both")
   
-  ## Remove comment characters
+  ## Remove comment characters (hash sign)
   str_out <- gsub("#", "", str_out, fixed = TRUE)
-  
-  ## Convert asterices to dashes
-  str_out <- gsub("*", "-", str_out, fixed = TRUE)
   
   ## Convert newlines to dashes
   str_out <- gsub("[\r\n]", "-", str_out)
-  
-  ## Remove non-ASCII characters
-  str_out <- iconv(str_out, "latin1", "ASCII", sub="")
   
   ## Convert all delimiters (except no delimiter) to dashes
   str_out <- gsub("\\s|-|\\.|_", "-", str_out)
