@@ -24,11 +24,13 @@ Standardize character vectors to a common format
 }
 \details{
 This function somewhat crudely attempts to force character vectors
-  to a common format. It does this by converting everything to uppercase, and replacing
-  all common word delimiters (space, period, underscore, dash) with the selected one.
+  to a common format. It does this by converting everything to upper or lowercase, 
+  and replacing all common word delimiters (space, period, underscore, dash, 
+  comma) with the selected one.
   Note that of the three, only underscores or periods will form syntactically-
   valid R variable names (override by reading in tables with check.names = FALSE). 
-  However, underscores can cause problems with reading
-  VCFs in PLINK, as they will by default be interpreted as delimiters for
-  family and individual IDs
+  However, underscores can cause problems with reading VCFs in PLINK, as they 
+  will by default be interpreted as delimiters for family and individual IDs.
+  Choosing spaces or commas as the output delimiter is generally not recommended, as this
+  can cause issues in whitespace-delimited or comma-delimited text files, respectively.
 }
