@@ -3,6 +3,7 @@
 export(Cullis_H2)
 export(calc_gmat)
 export(clean_dvec)
+export(coindex)
 export(color_bar)
 export(eigstrat)
 export(env_connect)

@@ -4,3 +4,4 @@ doc
 *.Rhistory
 temp/*
 inst/doc
+*.DS_Store
