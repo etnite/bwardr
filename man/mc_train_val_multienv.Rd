@@ -23,8 +23,9 @@ new environments).}
 }
 \value{
 A dataframe identical to the input phenotypic dataframe, except with
-  a TRAIN_VAL column added (if not previously present) or else re-randomized 
-  (if the columns was already present) to indicate training/validation sets.
+  a VAL_SET column added (if not previously present) or else re-randomized 
+  (if the column was already present) to indicate lines assigned to the
+  validation set
 }
 \description{
 Monte Carlo training/validation splits for multi-environment data

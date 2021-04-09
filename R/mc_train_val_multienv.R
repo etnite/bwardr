@@ -12,8 +12,9 @@
 #'   by genotype-environment combination (i.e. simulates introducing genotypes into
 #'   new environments).
 #' @return A dataframe identical to the input phenotypic dataframe, except with
-#'   a TRAIN_VAL column added (if not previously present) or else re-randomized 
-#'   (if the columns was already present) to indicate training/validation sets.
+#'   a VAL_SET column added (if not previously present) or else re-randomized 
+#'   (if the column was already present) to indicate lines assigned to the
+#'   validation set
 #' @details This function only performs Monte Carlo (i.e. random subsampling)
 #'   cross-validation training/validation assignment. Note that k-fold cross
 #'   validation becomes difficult to perform for a CV2 scheme. 
@@ -31,14 +32,14 @@
 mc_train_val_multienv <- function(pheno, prop_val = 0.2, cv_scheme = "CV1") {
   
   cv_scheme   <- toupper(cv_scheme)
-  pheno$TRAIN_VAL <- "train"
+  pheno$VAL_SET <- FALSE
   pheno$CONCAT <- paste(pheno$ENV, pheno$IID, sep = "_")
 
   ## for CV1 cross-validation, define training/validation split by genotype (IID)
   if (cv_scheme == "CV1") {
       rand_iid <- sample(unique(pheno$IID), 
                          size = round(length(unique(pheno$IID)) * prop_val))
-      pheno$TRAIN_VAL[pheno$IID %in% rand_iid] <- "val"
+      pheno$VAL_SET[pheno$IID %in% rand_iid] <- TRUE
     
   ## CV2 is quite a bit more involved
   } else if (cv_scheme == "CV2") {
@@ -88,7 +89,7 @@ mc_train_val_multienv <- function(pheno, prop_val = 0.2, cv_scheme = "CV1") {
         geno_pool <- setdiff(geno_pool, one_env$IID[1:npull])
       } ## End of ENV loop
       
-    pheno$TRAIN_VAL[pheno$CONCAT %in% ge_vec] <- "val"
+    pheno$VAL_SET[pheno$CONCAT %in% ge_vec] <- TRUE
   } ## End of CV-scheme if-else
   
   pheno$CONCAT <- NULL
