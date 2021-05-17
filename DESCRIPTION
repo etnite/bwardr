@@ -19,5 +19,6 @@ Suggests: knitr,
     rmarkdown,
     gaston,
     MonoPoly,
-    coop
+    coop,
+    stringdist
 VignetteBuilder: knitr

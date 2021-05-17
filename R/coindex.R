@@ -12,6 +12,7 @@
 #'    \item "median" to perform stabilizing selection around the median of the observed data
 #'    \item numeric, in which case it is assumed that the ideal phenotypic value has been supplied
 #'  }
+#' @return The calculated coincidence index
 #' @details This function calculates the coincidence index as defined by Hamblin
 #'   and Zimmerman, 1986. (https://doi.org/10.1002/9781118061015.ch8). In the context
 #'   of this function, its intended use is to compare direct phenotypic selection

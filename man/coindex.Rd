@@ -23,6 +23,9 @@ coindex(obs, pred, si, best = "high")
   \item numeric, in which case it is assumed that the ideal phenotypic value has been supplied
 }}
 }
+\value{
+The calculated coincidence index
+}
 \description{
 Calculate Coincidence Index
 }
