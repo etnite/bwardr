@@ -8,8 +8,8 @@
 #'  \enumerate{
 #'    \item "high" to perform directional selection of genotypes with highest trait values
 #'    \item "low" to perform directional selection of genotypes with lowest trait values
-#'    \item "mean" to perform stabilizing selection around the mean of the observed data
-#'    \item "median" to perform stabilizing selection around the median of the observed data
+#'    \item "mean" to perform stabilizing selection around the mean values of the observed and predicted data
+#'    \item "median" to perform stabilizing selection around the median values of the observed and predicted data
 #'    \item numeric, in which case it is assumed that the ideal phenotypic value has been supplied
 #'  }
 #' @return The calculated coincidence index
@@ -43,15 +43,20 @@ coindex <- function(obs, pred, si, best = "high") {
   ## Set the target value for selection, based on best being specified as either
   ## "high", "low", "mean", "median" or a numeric value
   if (best == "high") {
-    target <- max(c(obs, pred))
+    obs_targ <- max(obs)
+    pred_targ <- max(pred)
   } else if (best == "low") {
-    target <- min(c(obs, pred))
+    obs_targ <- min(obs)
+    pred_targ <- min(pred)
   } else if (best == "mean") {
-    target <- mean(obs)
+    obs_targ <- mean(obs)
+    pred_targ <- mean(pred)
   } else if (best == "median") {
-    target <- median(obs)
+    obs_targ <- median(obs)
+    pred_targ <- median(pred)
   } else if (is.numeric(best)) {
-    target <- best
+    obs_targ <- best
+    pred_targ <- best
   } else {
     stop("Incorrect specification of 'best' parameter")
   }
@@ -72,8 +77,8 @@ coindex <- function(obs, pred, si, best = "high") {
   r <- round(t * si)
   
   ## Make selections based on observed and predicted vals; calculate c
-  obs <- sort(abs(target - obs))[1:t]
-  pred <- sort(abs(target - pred))[1:t]
+  obs <- sort(abs(obs_targ - obs))[1:t]
+  pred <- sort(abs(pred_targ - pred))[1:t]
   c <- length(intersect(names(obs), names(pred)))
   
   ## Calculate and return coincidence index

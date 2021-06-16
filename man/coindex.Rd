@@ -18,8 +18,8 @@ coindex(obs, pred, si, best = "high")
 \enumerate{
   \item "high" to perform directional selection of genotypes with highest trait values
   \item "low" to perform directional selection of genotypes with lowest trait values
-  \item "mean" to perform stabilizing selection around the mean of the observed data
-  \item "median" to perform stabilizing selection around the median of the observed data
+  \item "mean" to perform stabilizing selection around the mean values of the observed and predicted data
+  \item "median" to perform stabilizing selection around the median values of the observed and predicted data
   \item numeric, in which case it is assumed that the ideal phenotypic value has been supplied
 }}
 }
