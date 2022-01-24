@@ -19,6 +19,9 @@
 #' @param var_rep Positive float - Variance between replications within same environment
 #' @param beta_ab Improper fraction - Beta distribution shape parameter to control
 #' GxE effect. See details.
+#' @param return_scaled Logical - Indicates whether to scale the genetic signal and
+#'   the error by the phenotypic standard deviation before returning the outputted
+#'   plots data
 #' @return A list containing the following elements:
 #' * plots_data - Dataframe containing data for individual plots in each environment
 #' * qtl_effects - Dataframe containing QTL effects in each environment
@@ -35,7 +38,7 @@
 #' @export
 simulate_plots <- function(X, snps = 1000, inds = 100, qtls = 20, n_envs = 4,
                            n_reps = 2, var_phen = 10, h2 = 0.75, var_env = 5,
-                           var_rep = 0.5, beta_ab = 5) {
+                           var_rep = 0.5, beta_ab = 5, return_scaled = FALSE) {
   
   ## Sanity checks on input
   stopifnot(n_envs >= 1)
@@ -127,6 +130,12 @@ simulate_plots <- function(X, snps = 1000, inds = 100, qtls = 20, n_envs = 4,
   }
   plots_data <- do.call("rbind", sim_list)
   qtl_effects <- do.call("rbind", qtl_list)
+  
+  ## Optionally scale genetic signal and error prior to outputting
+  if (return_scaled) {
+    plots_data$GEN <- plots_data$GEN * sqrt(var_phen)
+    plots_data$ERROR <- plots_data$ERROR * sqrt(var_phen)
+  }
   
   return(list("plots_data" = plots_data, "qtl_effects" = qtl_effects))  
 }

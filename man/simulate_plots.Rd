@@ -15,7 +15,8 @@ simulate_plots(
   h2 = 0.75,
   var_env = 5,
   var_rep = 0.5,
-  beta_ab = 5
+  beta_ab = 5,
+  return_scaled = FALSE
 )
 }
 \arguments{
@@ -48,6 +49,10 @@ SNP names to assign as QTLs}
 
 \item{beta_ab}{Improper fraction - Beta distribution shape parameter to control
 GxE effect. See details.}
+
+\item{return_scaled}{Logical - Indicates whether to scale the genetic signal and
+the error by the phenotypic standard deviation before returning the outputted
+plots data}
 }
 \value{
 A list containing the following elements:
