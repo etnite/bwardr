@@ -85,7 +85,7 @@ coindex <- function(obs, pred, si, best = "high", naive = FALSE) {
   
   ## Calculate and return coincidence index
   if (naive) {
-    CI <- c / length(inter_names)
+    CI <- c / t
   } else {
     CI <- (c - r) / (t - r)
   }
