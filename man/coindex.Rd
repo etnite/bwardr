@@ -4,7 +4,7 @@
 \alias{coindex}
 \title{Calculate Coincidence Index}
 \usage{
-coindex(obs, pred, si, best = "high")
+coindex(obs, pred, si, best = "high", naive = FALSE)
 }
 \arguments{
 \item{obs}{A named vector of observed phenotypic data}
@@ -22,6 +22,9 @@ coindex(obs, pred, si, best = "high")
   \item "median" to perform stabilizing selection around the median values of the observed and predicted data
   \item numeric, in which case it is assumed that the ideal phenotypic value has been supplied
 }}
+
+\item{naive}{Logical - if TRUE then a simple proportion matching coefficient is
+returned, without correcting for random chance}
 }
 \value{
 The calculated coincidence index

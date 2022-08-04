@@ -12,6 +12,8 @@
 #'    \item "median" to perform stabilizing selection around the median values of the observed and predicted data
 #'    \item numeric, in which case it is assumed that the ideal phenotypic value has been supplied
 #'  }
+#' @param naive Logical - if TRUE then a simple proportion matching coefficient is
+#'   returned, without correcting for random chance
 #' @return The calculated coincidence index
 #' @details This function calculates the coincidence index as defined by Hamblin
 #'   and Zimmerman, 1986. (https://doi.org/10.1002/9781118061015.ch8). In the context
@@ -33,7 +35,7 @@
 #'   based on predicted values were no better than random chance. Note that CI values
 #'   can be negative. Small samples sizes will lead to high CI variance.
 #' @export
-coindex <- function(obs, pred, si, best = "high") {
+coindex <- function(obs, pred, si, best = "high", naive = FALSE) {
   
   ## Sanity check on inputs
   if (si >= 1 | si <= 0) {
@@ -82,6 +84,10 @@ coindex <- function(obs, pred, si, best = "high") {
   c <- length(intersect(names(obs), names(pred)))
   
   ## Calculate and return coincidence index
-  CI <- (c - r) / (t - r)
+  if (naive) {
+    CI <- c / length(inter_names)
+  } else {
+    CI <- (c - r) / (t - r)
+  }
   return(CI)
 }
