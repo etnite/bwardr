@@ -4,7 +4,7 @@
 \alias{env_connect}
 \title{Evaluate connectivity between environments}
 \usage{
-env_connect(pheno, env, geno, output = "dataframe")
+env_connect(pheno, env, geno, proportion = FALSE, output = "dataframe")
 }
 \arguments{
 \item{pheno}{Dataframe containing one column for environment identifier, and
@@ -15,6 +15,10 @@ environment identifiers.}
 
 \item{geno}{String containing the name of the column in pheno containing
 genotype identifiers.}
+
+\item{proportion}{Logical indicating whether to return proportion of lines shared
+between each pair of environments (i.e. the intersection of lines / union of lines) or
+else just return the raw number of lines shared between environments}
 
 \item{output}{String containing either "dataframe" to return a three-column
 dataframe, or "matrix" to return a sparse matrix.}
